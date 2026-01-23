@@ -74,7 +74,7 @@
     }
 
     /* ===========================
-       HERO (primeira aba azulada)
+       HERO (primeira aba azulada) - com CARROSSEL
        =========================== */
     .hero {
       margin-top: 20px;
@@ -151,145 +151,156 @@
       box-shadow: 0 6px 14px rgba(10,10,10,0.12);
     }
 
-    /* hero image / right column */
-    .hero-visual{
+    /* ===========================
+       CARROSSEL: estilos principais
+       =========================== */
+    .hero-carousel {
+      position:relative;
       border-radius:12px;
       overflow:hidden;
       border: 1px solid rgba(255,255,255,0.04);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     }
 
-    /* ===========================
-       Separator / section title
-       =========================== */
-    .section {
-      margin: 36px 0 14px 0;
-      padding: 36px 0;
-    }
-    .section .title {
+    .slides {
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:18px;
-    }
-    .section h2{
-      font-family: "Playfair Display", serif;
-      font-size:28px;
-      margin:0;
-      color:var(--navy);
-    }
-    .section p.lead{
-      margin:0;
-      color: #666;
-      font-size:15px;
+      transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+      will-change: transform;
     }
 
-    /* ===========================
-       FEATURE CARDS (três colunas)
-       =========================== */
-    .card-grid {
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:20px;
-      align-items:start;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,241,0.96));
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: 0 6px 24px var(--card-shadow);
-      border: 1px solid rgba(10,10,10,0.03);
-      transition: transform .22s ease, box-shadow .22s ease;
-    }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 34px rgba(8,12,16,0.12); }
-
-    .card .thumb {
-      height:170px;
-      overflow:hidden;
+    .slide {
+      min-width:100%;
       display:block;
-    }
-    .card .meta {
-      padding:16px 16px 18px 16px;
-    }
-    .card .meta h3{
-      margin:0 0 8px 0;
-      font-size:16px;
-      color:var(--navy);
-      font-weight:700;
-    }
-    .card .meta p {
-      margin:0;
-      font-size:14px;
-      color:#666;
+      position:relative;
+      padding:0;
     }
 
-    /* subtle ribbon */
-    .ribbon {
-      display:inline-block;
+    .slide .imgwrap {
+      height: 260px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02));
+    }
+    .slide img { width:100%; height:100%; object-fit:cover; display:block; border-radius:0; }
+
+    .slide .overlay {
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.48));
+      color:#fff;
+      padding:14px 16px;
+      border-radius:10px;
+      backdrop-filter: blur(2px);
+    }
+    .slide h3{
+      margin:0 0 6px 0;
+      font-size:18px;
+      font-family: "Playfair Display", serif;
+      color:#fff;
+    }
+    .slide p {
+      margin:0;
       font-size:13px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* arrows */
+    .carousel-btn {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color: #fff;
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+      z-index:6;
+    }
+    .carousel-btn:hover { transform: translateY(-50%) scale(1.03); background: rgba(255,255,255,0.09); }
+    .carousel-btn:active { transform: translateY(-50%) scale(.98); }
+
+    .carousel-btn.prev { left:12px; }
+    .carousel-btn.next { right:12px; }
+
+    /* indicators (bolinhas) */
+    .indicators {
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      z-index:7;
+    }
+    .indicator {
+      width:9px;height:9px;border-radius:99px;background:rgba(255,255,255,0.22);cursor:pointer;border:1px solid rgba(255,255,255,0.06);
+    }
+    .indicator.active { background: var(--mustard); box-shadow:0 4px 10px rgba(0,0,0,0.12); }
+
+    /* small caption above slides (optional) */
+    .slide-tag {
+      position:absolute;
+      left:18px;
+      top:18px;
+      z-index:5;
+      background: rgba(255,255,255,0.06);
+      color:#fff;
       padding:6px 10px;
       border-radius:8px;
-      background: linear-gradient(90deg, rgba(188,160,62,0.14), rgba(122,51,51,0.06));
-      color: var(--navy);
-      font-weight:600;
+      font-size:13px;
+      border:1px solid rgba(255,255,255,0.03);
     }
 
-    /* full-width mustard band (vintage callout) */
-    .band {
-      background: linear-gradient(180deg, rgba(184,154,58,0.12), rgba(122,51,51,0.04));
-      border-top: 1px solid rgba(10,10,10,0.02);
-      padding:28px 0;
-      margin-top:28px;
-      border-radius:12px;
-    }
-    .band .inner {
-      display:flex;
-      gap:24px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .band .cta {
-      font-family: "Playfair Display", serif;
-      font-size:28px;
-      color:var(--navy);
-      margin:0;
-    }
-    .band .signup {
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .band input[type="email"]{
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid rgba(10,10,10,0.06);
-      background: white;
-      min-width:220px;
-    }
-    .band button { background: var(--maroon); color:#fff; border:0; padding:10px 14px; border-radius:8px; font-weight:700; cursor:pointer; }
-
-    /* ===========================
-       Footer
-       =========================== */
-    footer{ margin:36px 0; padding:18px 0; font-size:14px; color:#777; text-align:center }
-
-    /* ===========================
-       Responsividade
-       =========================== */
+    /* responsive adjustments */
     @media (max-width: 1000px) {
       .hero-inner { grid-template-columns: 1fr; padding:28px; }
-      .hero-visual { order: -1; margin-bottom:18px; }
-      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-visual, .hero-carousel { order: -1; margin-bottom:18px; }
     }
     @media (max-width: 640px) {
       .site { padding:18px; }
       .hero-copy h1 { font-size:28px; }
-      .card-grid { grid-template-columns: 1fr; }
-      .hero-inner { padding:18px; }
       .brand { font-size:18px; }
-      .band .inner { flex-direction:column; align-items:stretch; gap:12px; }
+      .slide .imgwrap { height:200px; }
+      .carousel-btn { width:38px;height:38px; }
+    }
+
+    /* ===========================
+       Restantes (cards, band, footer) - mantidos do template
+       =========================== */
+    .section { margin: 36px 0 14px 0; padding: 36px 0; }
+    .section .title { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+    .section h2{ font-family: "Playfair Display", serif; font-size:28px; margin:0; color:var(--navy); }
+    .section p.lead{ margin:0; color: #666; font-size:15px; }
+
+    .card-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; align-items:start; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,241,0.96)); border-radius: var(--radius); overflow:hidden; box-shadow: 0 6px 24px var(--card-shadow); border: 1px solid rgba(10,10,10,0.03); transition: transform .22s ease, box-shadow .22s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 34px rgba(8,12,16,0.12); }
+    .card .thumb { height:170px; overflow:hidden; display:block; }
+    .card .meta { padding:16px 16px 18px 16px; }
+    .card .meta h3{ margin:0 0 8px 0; font-size:16px; color:var(--navy); font-weight:700; }
+    .card .meta p { margin:0; font-size:14px; color:#666; }
+    .ribbon { display:inline-block; font-size:13px; padding:6px 10px; border-radius:8px; background: linear-gradient(90deg, rgba(188,160,62,0.14), rgba(122,51,51,0.06)); color: var(--navy); font-weight:600; }
+
+    .band { background: linear-gradient(180deg, rgba(184,154,58,0.12), rgba(122,51,51,0.04)); border-top: 1px solid rgba(10,10,10,0.02); padding:28px 0; margin-top:28px; border-radius:12px; }
+    .band .inner { display:flex; gap:24px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .band .cta { font-family: "Playfair Display", serif; font-size:28px; color:var(--navy); margin:0; }
+    .band .signup { display:flex; gap:10px; align-items:center; }
+    .band input[type="email"]{ padding:10px 12px; border-radius:8px; border:1px solid rgba(10,10,10,0.06); background: white; min-width:220px; }
+    .band button { background: var(--maroon); color:#fff; border:0; padding:10px 14px; border-radius:8px; font-weight:700; cursor:pointer; }
+
+    footer{ margin:36px 0; padding:18px 0; font-size:14px; color:#777; text-align:center }
+
+    @media (max-width: 1000px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -306,7 +317,7 @@
       </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO (com CARROSSEL de posts no lugar da imagem) -->
     <section class="hero" role="banner" aria-label="hero">
       <div class="hero-inner">
         <div class="hero-copy">
@@ -319,9 +330,54 @@
           </div>
         </div>
 
-        <!-- Replace the image src with your hero photo -->
-        <div class="hero-visual" aria-hidden="true">
-          <img src="https://via.placeholder.com/860x420.png?text=Hero+Image" alt="Imagem de destaque — substitua por sua imagem" />
+        <!-- CARROSSEL -->
+        <div class="hero-carousel" id="heroCarousel" aria-roledescription="carousel">
+          <div class="slides" id="slides">
+            <!-- Slide 1 -->
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
+              <div class="imgwrap"><img src="https://via.placeholder.com/860x420.png?text=Post+1" alt="Thumb post 1"></div>
+              <div class="slide-tag">Featured</div>
+              <div class="overlay">
+                <h3>Tour pelo meu escritório — setups e organização</h3>
+                <p>Minimal, prático e com soluções que realmente funcionam. <a href="#" style="color: #fff; opacity:0.9;">Ler agora →</a></p>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+              <div class="imgwrap"><img src="https://via.placeholder.com/860x420.png?text=Post+2" alt="Thumb post 2"></div>
+              <div class="slide-tag">Design</div>
+              <div class="overlay">
+                <h3>Como escolhi a paleta vintage sem perder clareza</h3>
+                <p>Estratégias simples para manter legibilidade e personalidade. <a href="#" style="color: #fff; opacity:0.9;">Ler agora →</a></p>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+              <div class="imgwrap"><img src="https://via.placeholder.com/860x420.png?text=Post+3" alt="Thumb post 3"></div>
+              <div class="slide-tag">Inspiração</div>
+              <div class="overlay">
+                <h3>Rotina de domingo: planejamento, leitura e pequenos rituais</h3>
+                <p>Textos curtos e ação prática para melhorar sua semana. <a href="#" style="color: #fff; opacity:0.9;">Ler agora →</a></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrows -->
+          <button class="carousel-btn prev" id="prevBtn" aria-label="Slide anterior">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="carousel-btn next" id="nextBtn" aria-label="Próximo slide">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <!-- Indicators -->
+          <div class="indicators" id="indicators" role="tablist" aria-label="Slide indicators">
+            <button class="indicator" data-index="0" aria-label="Ir para slide 1"></button>
+            <button class="indicator" data-index="1" aria-label="Ir para slide 2"></button>
+            <button class="indicator" data-index="2" aria-label="Ir para slide 3"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -388,9 +444,112 @@
   </div>
 
   <script>
+    // ====== Carousel logic (lightweight, dependency-free) ======
+    (function(){
+      const slidesWrap = document.getElementById('slides');
+      const slides = Array.from(slidesWrap.children);
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const indicators = Array.from(document.querySelectorAll('.indicator'));
+      const carousel = document.getElementById('heroCarousel');
+
+      let idx = 0;
+      const len = slides.length;
+      const interval = 5000; // autoplay ms
+      let timer = null;
+      let isTouch = false;
+      let startX = 0, deltaX = 0;
+
+      function update() {
+        slidesWrap.style.transform = `translateX(${ -idx * 100 }%)`;
+        indicators.forEach((b,i)=> b.classList.toggle('active', i===idx));
+        // update aria labels
+        slides.forEach((s,i)=> s.setAttribute('aria-label', `${i+1} de ${len}`));
+      }
+
+      function show(n) {
+        idx = (n + len) % len;
+        update();
+      }
+
+      function next() { show(idx+1); }
+      function prev() { show(idx-1); }
+
+      // autoplay
+      function startAuto() {
+        stopAuto();
+        timer = setInterval(next, interval);
+      }
+      function stopAuto(){
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+
+      // events
+      nextBtn.addEventListener('click', ()=> { next(); resetAuto(); });
+      prevBtn.addEventListener('click', ()=> { prev(); resetAuto(); });
+
+      indicators.forEach(b=>{
+        b.addEventListener('click', (e)=>{
+          const i = Number(b.dataset.index);
+          show(i);
+          resetAuto();
+        });
+      });
+
+      // keyboard
+      document.addEventListener('keydown', (e)=>{
+        if (e.key === 'ArrowLeft') { prev(); resetAuto(); }
+        if (e.key === 'ArrowRight') { next(); resetAuto(); }
+      });
+
+      // pause on hover/focus
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+      carousel.addEventListener('focusin', stopAuto);
+      carousel.addEventListener('focusout', startAuto);
+
+      // touch / swipe
+      carousel.addEventListener('touchstart', (e)=>{
+        isTouch = true;
+        stopAuto();
+        startX = e.touches[0].clientX;
+        deltaX = 0;
+      }, {passive:true});
+      carousel.addEventListener('touchmove', (e)=>{
+        if (!isTouch) return;
+        deltaX = e.touches[0].clientX - startX;
+        // move slides as user swipes (subtle)
+        slidesWrap.style.transition = 'none';
+        slidesWrap.style.transform = `translateX(${ -idx * 100 + (deltaX / carousel.clientWidth) * 100 }%)`;
+      }, {passive:true});
+      carousel.addEventListener('touchend', (e)=>{
+        slidesWrap.style.transition = '';
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX < 0) next(); else prev();
+        } else {
+          show(idx);
+        }
+        isTouch = false;
+        startAuto();
+      });
+
+      // helper: reset autoplay after manual nav
+      function resetAuto(){
+        stopAuto(); startAuto();
+      }
+
+      // init
+      show(0);
+      startAuto();
+
+      // accessibility: make indicators focusable
+      indicators.forEach(b => b.setAttribute('tabindex','0'));
+    })();
+
     // atualiza ano no footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
 
