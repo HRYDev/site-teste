@@ -1,1 +1,396 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meu Blog Vintage</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================
+       Variáveis de cor / tema
+       =========================== */
+    :root{
+      --navy: #0f2b3c;          /* azul escuro */
+      --mustard: #b89a3a;      /* amarelo apagado escuro */
+      --maroon: #7a3333;       /* vermelho apagado escuro */
+      --cream: #f4efe6;        /* fundo claro / papel */
+      --muted-text: #4a4a45;
+      --card-shadow: rgba(8,12,16,0.08);
+      --max-width: 1180px;
+      --radius: 12px;
+    }
+
+    /* ===========================
+       Reset mínimo e tipografia
+       =========================== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--muted-text);
+      background:linear-gradient(180deg, var(--cream) 0%, #efeae2 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block;border-radius:6px}
+
+    /* ===========================
+       Container central
+       =========================== */
+    .site {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    /* ===========================
+       Navbar simples
+       =========================== */
+    .nav {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding: 10px 0;
+    }
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size:22px;
+      letter-spacing:0.6px;
+      color:var(--navy);
+    }
+    .nav-links {
+      display:flex;
+      gap:18px;
+      font-weight:600;
+      color:var(--navy);
+    }
+
+    /* ===========================
+       HERO (primeira aba azulada)
+       =========================== */
+    .hero {
+      margin-top: 20px;
+      background: linear-gradient(180deg, rgba(15,43,60,0.96), rgba(12,36,50,0.9));
+      color: #fff;
+      border-radius: 18px;
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 8px 30px rgba(8,12,16,0.18);
+    }
+
+    /* vintage grain overlay (subtle) */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode:overlay;
+      opacity:0.6;
+    }
+
+    .hero-inner {
+      display:grid;
+      grid-template-columns: 1fr 460px;
+      gap:30px;
+      align-items:center;
+      padding:48px;
+    }
+
+    .hero-copy h1{
+      font-family: "Playfair Display", serif;
+      font-size:44px;
+      margin:0 0 12px 0;
+      line-height:1.02;
+      letter-spacing: -0.5px;
+      color: #f7f4ef;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.08);
+    }
+    .hero-copy p{
+      color: #e6dfd4;
+      margin: 0 0 18px 0;
+      font-size:16px;
+    }
+
+    /* call to action / subscribe */
+    .subscribe {
+      background: rgba(255,255,255,0.06);
+      padding:18px;
+      border-radius:10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,0.06);
+      max-width:420px;
+    }
+    .subscribe input[type="email"]{
+      flex:1;
+      border:0;
+      background:transparent;
+      color: #fff;
+      outline:none;
+      font-size:15px;
+    }
+    .subscribe button{
+      background:var(--mustard);
+      color:var(--navy);
+      border:0;
+      padding:10px 14px;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow: 0 6px 14px rgba(10,10,10,0.12);
+    }
+
+    /* hero image / right column */
+    .hero-visual{
+      border-radius:12px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* ===========================
+       Separator / section title
+       =========================== */
+    .section {
+      margin: 36px 0 14px 0;
+      padding: 36px 0;
+    }
+    .section .title {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .section h2{
+      font-family: "Playfair Display", serif;
+      font-size:28px;
+      margin:0;
+      color:var(--navy);
+    }
+    .section p.lead{
+      margin:0;
+      color: #666;
+      font-size:15px;
+    }
+
+    /* ===========================
+       FEATURE CARDS (três colunas)
+       =========================== */
+    .card-grid {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:20px;
+      align-items:start;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,241,0.96));
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: 0 6px 24px var(--card-shadow);
+      border: 1px solid rgba(10,10,10,0.03);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 34px rgba(8,12,16,0.12); }
+
+    .card .thumb {
+      height:170px;
+      overflow:hidden;
+      display:block;
+    }
+    .card .meta {
+      padding:16px 16px 18px 16px;
+    }
+    .card .meta h3{
+      margin:0 0 8px 0;
+      font-size:16px;
+      color:var(--navy);
+      font-weight:700;
+    }
+    .card .meta p {
+      margin:0;
+      font-size:14px;
+      color:#666;
+    }
+
+    /* subtle ribbon */
+    .ribbon {
+      display:inline-block;
+      font-size:13px;
+      padding:6px 10px;
+      border-radius:8px;
+      background: linear-gradient(90deg, rgba(188,160,62,0.14), rgba(122,51,51,0.06));
+      color: var(--navy);
+      font-weight:600;
+    }
+
+    /* full-width mustard band (vintage callout) */
+    .band {
+      background: linear-gradient(180deg, rgba(184,154,58,0.12), rgba(122,51,51,0.04));
+      border-top: 1px solid rgba(10,10,10,0.02);
+      padding:28px 0;
+      margin-top:28px;
+      border-radius:12px;
+    }
+    .band .inner {
+      display:flex;
+      gap:24px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .band .cta {
+      font-family: "Playfair Display", serif;
+      font-size:28px;
+      color:var(--navy);
+      margin:0;
+    }
+    .band .signup {
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .band input[type="email"]{
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid rgba(10,10,10,0.06);
+      background: white;
+      min-width:220px;
+    }
+    .band button { background: var(--maroon); color:#fff; border:0; padding:10px 14px; border-radius:8px; font-weight:700; cursor:pointer; }
+
+    /* ===========================
+       Footer
+       =========================== */
+    footer{ margin:36px 0; padding:18px 0; font-size:14px; color:#777; text-align:center }
+
+    /* ===========================
+       Responsividade
+       =========================== */
+    @media (max-width: 1000px) {
+      .hero-inner { grid-template-columns: 1fr; padding:28px; }
+      .hero-visual { order: -1; margin-bottom:18px; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .site { padding:18px; }
+      .hero-copy h1 { font-size:28px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .hero-inner { padding:18px; }
+      .brand { font-size:18px; }
+      .band .inner { flex-direction:column; align-items:stretch; gap:12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <!-- NAV -->
+    <nav class="nav" aria-label="main navigation">
+      <div class="brand">Seu Nome</div>
+      <div class="nav-links">
+        <a href="#">home</a>
+        <a href="#">about</a>
+        <a href="#">blog</a>
+        <a href="#">resources</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" role="banner" aria-label="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>Um lugar para ideias, design e uma pausa criativa</h1>
+          <p>Textos curtos, tours do meu workspace e pequenas melhorias para sua rotina criativa. Conteúdo prático e com estética vintage.</p>
+
+          <div class="subscribe" role="search" aria-label="inscrição">
+            <input type="email" placeholder="Seu melhor e-mail" />
+            <button>Inscrever</button>
+          </div>
+        </div>
+
+        <!-- Replace the image src with your hero photo -->
+        <div class="hero-visual" aria-hidden="true">
+          <img src="https://via.placeholder.com/860x420.png?text=Hero+Image" alt="Imagem de destaque — substitua por sua imagem" />
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED / cards -->
+    <section class="section" aria-labelledby="featured-title">
+      <div class="title">
+        <h2 id="featured-title">Featured posts</h2>
+        <p class="lead">Três destaques — posts, tours e ideias</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <a class="thumb" href="#">
+            <img src="https://via.placeholder.com/600x360.png?text=Post+1" alt="thumb post 1" />
+          </a>
+          <div class="meta">
+            <span class="ribbon">Featured</span>
+            <h3>Tour pelo meu escritório — setups e organização</h3>
+            <p>Minimal, prático e com soluções que realmente funcionam.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="#">
+            <img src="https://via.placeholder.com/600x360.png?text=Post+2" alt="thumb post 2" />
+          </a>
+          <div class="meta">
+            <span class="ribbon">Design</span>
+            <h3>Como escolhi a paleta vintage sem perder clareza</h3>
+            <p>Estratégias simples para manter legibilidade e personalidade.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="#">
+            <img src="https://via.placeholder.com/600x360.png?text=Post+3" alt="thumb post 3" />
+          </a>
+          <div class="meta">
+            <span class="ribbon">Inspiração</span>
+            <h3>Rotina de domingo: planejamento, leitura e pequenos rituais</h3>
+            <p>Textos curtos e ação prática para melhorar sua semana.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- mustard band / callout -->
+    <section class="band" aria-label="newsletter">
+      <div class="site inner" style="max-width:var(--max-width); padding:0;">
+        <div class="inner">
+          <h3 class="cta">Meet your new <em>Sunday Ritual</em></h3>
+          <div class="signup">
+            <input type="email" placeholder="Seu e-mail" />
+            <button>Join</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Seu Nome • Feito com atenção — template vintage
+    </footer>
+  </div>
+
+  <script>
+    // atualiza ano no footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
