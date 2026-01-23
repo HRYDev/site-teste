@@ -1,1 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meu Blog</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#0f2b3c;
+      --mustard:#b89a3a;
+      --maroon:#7a3333;
+      --cream:#f4efe6;
+      --text:#4a4a45;
+      --radius:12px;
+      --max-width:1180px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      background:var(--cream);
+      color:var(--text);
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    .site{
+      max-width:var(--max-width);
+      margin:auto;
+      padding:28px;
+    }
+
+    /* NAV */
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .brand{
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+      color:var(--navy);
+    }
+    .nav-links a{
+      margin-left:16px;
+      font-weight:600;
+      color:var(--navy);
+    }
+
+    /* HERO */
+    .hero{
+      margin-top:24px;
+      background:linear-gradient(180deg,#0f2b3c,#0c2432);
+      border-radius:18px;
+      color:#f4efe6;
+      box-shadow:0 12px 30px rgba(0,0,0,.2);
+    }
+
+    .hero-inner{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:32px;
+      padding:48px;
+    }
+
+    .hero h1{
+      font-family:"Playfair Display",serif;
+      font-size:42px;
+      margin:0 0 14px 0;
+      line-height:1.05;
