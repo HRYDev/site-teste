@@ -17,7 +17,7 @@
     }
     :root{
      
-      background-image:url('imagens/estrelado.png');
+     
       --bg-dark:#151413;       /* fundo geral muito escuro */
       --panel:#282523;         /* panel escuro (paper) */
       --paper:#efe7d6;         /* tom de papel velho */
@@ -55,13 +55,14 @@
       position:relative;
     }
 
-    /* subtle vignette and paper texture across site (pseudo) */
+    /* subtle vignette and paper texture across site (fundo site) */
     .site::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-      background-image:url('imagens/banner.png');
+
+      background-image:url('imagens/estrelado.png');
         radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 6%),
         radial-gradient(circle at 90% 80%, rgba(0,0,0,0.06), transparent 25%),
         linear-gradient(180deg, rgba(255,245,230,0.02), rgba(0,0,0,0.04));
@@ -171,7 +172,8 @@
       border-top:1px solid rgba(255,255,255,0.02);
       border-bottom-left-radius:12px;
       border-bottom-right-radius:12px;
-      pointer-events:none;
+      pointer-events:none;      
+      background-image:url('imagens/banner.png'); 
     }
 
     .slides{position:relative;height:100%}
