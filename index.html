@@ -53,16 +53,17 @@
       position:relative;
     }
 
-    /* subtle vignette and paper texture across site (fundo site) */
+    /* (fundo site) */
     .site::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
       background-image:url('imagens/coloful.jpg');
-      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 6%);
-      radial-gradient(circle at 90% 80%, rgba(0,0,0,0.06), transparent 25%);
-      linear-gradient(180deg, rgba(255,245,230,0.02), rgba(0,0,0,0.04));
+      background-size: cover;
+      radial-gradient:(circle at 10% 10%, rgba(255,255,255,0.02), transparent 6%);
+      radial-gradient:(circle at 90% 80%, rgba(0,0,0,0.06), transparent 25%);
+      linear-gradient:(180deg, rgba(255,245,230,0.02), rgba(0,0,0,0.04));
       mix-blend-mode:overlay;
       opacity:0.9;
     }
